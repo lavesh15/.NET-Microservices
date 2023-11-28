@@ -1,0 +1,40 @@
+#API Version name 
+apiVersion: apps/v1
+#What purpose to create pipeline
+kind: Deployment
+#Information Regarding Pipeline and here name is our metadata
+metadata:
+  name: commands-depl
+#Specification
+spec:
+  #replicas: Here should be 1 replica
+  replicas: 1
+  #selector is like what name of pod will be run and we are giving the same in template in lable 
+  #so from lable it will check and take it 
+  selector:
+    #Define lablename 
+    matchLabels:
+      app: commandsservice
+  template:
+    metadata:
+      labels:
+        app: commandsservice
+    #template specification, Here we have containers and when we start key name from (-) so it is an array in pipeline
+    spec:
+      containers:
+        - name: commandsservice
+          image: lavesh15/commandsservice:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: commands-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: commandsservice
+  ports:
+  - name: commandsservice
+    protocol: TCP
+    port: 80
+    targetPort: 80 

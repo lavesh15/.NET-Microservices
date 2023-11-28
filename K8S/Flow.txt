@@ -1,0 +1,17 @@
+Step1 --> Pod for Platform Service
+
+Step2 --> Node port to connect outer Ip to Platform Service
+
+Step3 --> Pod for Commad Service
+
+Step4 --> Create cluster Ip for both pod so Platform Service and Commad Service talk each other using synchronous messaging
+
+Step5 --> Now we add nginx-ingress pod
+
+Step6 --> Create ingress-srv service and now we add our Platform service and Commad service to in it.
+
+Step7 --> Create Platform service SQL server container (presistance volume claim) so for this we need to create pvc claim so we have created local-pvc.yaml
+
+Step8 --> Than we have to create mssql-plat-depl.yaml file where we create new pod for mssql and also create cluster service and load balance service (using this we can direct access from desktop)
+
+Step9 --> We can verify our database to connect using sql server using localhost, 1433 sa pa55w0rd!
